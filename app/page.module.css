@@ -4,11 +4,6 @@
   margin: 0 auto;
 }
 
-.main h1 {
-  font-size: 2rem;
-  margin-bottom: 32px;
-}
-
 .grilla {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
