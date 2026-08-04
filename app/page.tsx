@@ -12,7 +12,6 @@ const productos: Producto[] = [
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1>Tienda</h1>
       <div className={styles.grilla}>
         {productos.map((producto) => (
           <TarjetaProducto key={producto.id} producto={producto} />
