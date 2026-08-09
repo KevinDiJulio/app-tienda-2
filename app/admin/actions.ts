@@ -10,6 +10,7 @@ export async function crearProducto(formData: FormData) {
       descripcion: formData.get("descripcion") as string,
       precio: parseFloat(formData.get("precio") as string),
       emoji: formData.get("emoji") as string,
+      stock: parseInt(formData.get("stock") as string),
     },
   });
   revalidatePath("/admin");
@@ -29,6 +30,7 @@ export async function editarProducto(id: number, formData: FormData) {
       descripcion: formData.get("descripcion") as string,
       precio: parseFloat(formData.get("precio") as string),
       emoji: formData.get("emoji") as string,
+      stock: parseInt(formData.get("stock") as string),
     },
   });
   revalidatePath("/admin");

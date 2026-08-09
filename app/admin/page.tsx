@@ -24,6 +24,7 @@ export default async function AdminPage() {
               <th>Nombre</th>
               <th>Descripción</th>
               <th>Precio</th>
+              <th>Stock</th>
               <th>Acciones</th>
             </tr>
           </thead>
