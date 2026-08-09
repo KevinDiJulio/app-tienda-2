@@ -18,6 +18,7 @@ export default function FormularioProducto() {
       <input name="nombre" placeholder="Nombre" required className={styles.input} />
       <input name="descripcion" placeholder="Descripción" required className={styles.input} />
       <input name="precio" type="number" placeholder="Precio" required className={styles.input} />
+      <input name="stock" type="number" placeholder="Stock" required className={styles.input} />
       <button type="submit" className={styles.boton}>Agregar</button>
     </form>
   );

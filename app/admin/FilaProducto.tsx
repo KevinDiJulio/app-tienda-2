@@ -24,6 +24,7 @@ export default function FilaProducto({ producto }: Props) {
             <input name="nombre" defaultValue={producto.nombre} className={styles.input} />
             <input name="descripcion" defaultValue={producto.descripcion} className={styles.input} />
             <input name="precio" type="number" defaultValue={producto.precio} className={styles.input} />
+            <input name="stock" type="number" defaultValue={producto.stock} className={styles.input} />
             <button type="submit" className={styles.botonGuardar}>Guardar</button>
             <button type="button" onClick={() => setEditando(false)} className={styles.botonCancelar}>Cancelar</button>
           </form>
@@ -38,6 +39,7 @@ export default function FilaProducto({ producto }: Props) {
       <td>{producto.nombre}</td>
       <td>{producto.descripcion}</td>
       <td>${producto.precio.toLocaleString("es-AR")}</td>
+      <td>{producto.stock}</td>
       <td className={styles.acciones}>
         <button onClick={() => setEditando(true)} className={styles.botonEditar}>Editar</button>
         <button onClick={() => borrarProducto(producto.id)} className={styles.botonBorrar}>Borrar</button>

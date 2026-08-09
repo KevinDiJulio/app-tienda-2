@@ -4,4 +4,5 @@ export type Producto = {
   descripcion: string;
   precio: number;
   emoji: string;
+  stock: number;
 };
