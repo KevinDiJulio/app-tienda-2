@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { crearProducto } from "./actions";
-import styles from "./FormularioProducto.module.css";
 
 export default function FormularioProducto() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -12,14 +11,18 @@ export default function FormularioProducto() {
     formRef.current?.reset();
   }
 
+  const inputClass = "px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-blue-600";
+
   return (
-    <form ref={formRef} action={handleSubmit} className={styles.form}>
-      <input name="emoji" placeholder="Emoji" required className={styles.input} />
-      <input name="nombre" placeholder="Nombre" required className={styles.input} />
-      <input name="descripcion" placeholder="Descripción" required className={styles.input} />
-      <input name="precio" type="number" placeholder="Precio" required className={styles.input} />
-      <input name="stock" type="number" placeholder="Stock" required className={styles.input} />
-      <button type="submit" className={styles.boton}>Agregar</button>
+    <form ref={formRef} action={handleSubmit} className="flex gap-2.5 flex-wrap items-center">
+      <input name="emoji" placeholder="Emoji" required className={inputClass} />
+      <input name="nombre" placeholder="Nombre" required className={inputClass} />
+      <input name="descripcion" placeholder="Descripción" required className={inputClass} />
+      <input name="precio" type="number" placeholder="Precio" required className={inputClass} />
+      <input name="stock" type="number" placeholder="Stock" required className={inputClass} />
+      <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold cursor-pointer hover:bg-blue-700">
+        Agregar
+      </button>
     </form>
   );
 }
