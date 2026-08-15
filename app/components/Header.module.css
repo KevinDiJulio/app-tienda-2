@@ -16,11 +16,24 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #111111;
+  text-decoration: none;
 }
 
 .nav {
   display: flex;
   align-items: center;
+  gap: 20px;
+}
+
+.linkAdmin {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111111;
+  text-decoration: none;
+}
+
+.linkAdmin:hover {
+  text-decoration: underline;
 }
 
 .botonLogin {
