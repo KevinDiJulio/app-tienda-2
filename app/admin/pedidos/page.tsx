@@ -1,3 +1,4 @@
+import { createClerkClient } from "@clerk/nextjs/server";
 import { prisma } from "../../../lib/prisma";
 import styles from "./page.module.css";
 
@@ -26,6 +27,12 @@ export default async function AdminPedidosPage() {
     prisma.producto.findMany({ select: { id: true, nombre: true, emoji: true } }),
   ]);
 
+  const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
+
+  const userIds = [...new Set(pedidos.map((p) => p.userId))];
+  const usuarios = await Promise.all(userIds.map((id) => clerkClient.users.getUser(id)));
+  const usuarioMap = new Map(usuarios.map((u) => [u.id, u]));
+
   const productoMap = new Map(productos.map((p) => [p.id, p]));
 
   return (
@@ -39,7 +46,9 @@ export default async function AdminPedidosPage() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Usuario</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>ID usuario</th>
               <th>Producto</th>
               <th>Cantidad</th>
               <th>Estado</th>
@@ -49,9 +58,12 @@ export default async function AdminPedidosPage() {
           <tbody>
             {pedidos.map((pedido) => {
               const producto = productoMap.get(pedido.productoId);
+              const usuario = usuarioMap.get(pedido.userId);
               return (
                 <tr key={pedido.id}>
                   <td>{pedido.id}</td>
+                  <td>{usuario?.firstName ?? "—"}</td>
+                  <td>{usuario?.lastName ?? "—"}</td>
                   <td className={styles.userId}>{pedido.userId}</td>
                   <td>
                     {producto
