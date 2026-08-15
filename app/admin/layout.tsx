@@ -1,12 +1,3 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect("/");
-  }
-
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

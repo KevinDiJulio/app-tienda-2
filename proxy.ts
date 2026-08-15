@@ -1,6 +1,22 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-export default clerkMiddleware();
+const isApiRoute = createRouteMatcher(["/api/(.*)"]);
+
+export default clerkMiddleware(async (auth, req) => {
+  if (isApiRoute(req)) return;
+
+  const { userId, sessionClaims } = await auth();
+
+  if (!userId) {
+    return (await auth()).redirectToSignIn();
+  }
+
+  const isAdmin = sessionClaims?.publicMetadata?.role === "admin";
+  if (!isAdmin) {
+    return NextResponse.redirect(new URL("/no-autorizado", req.url));
+  }
+});
 
 export const config = {
   matcher: [
