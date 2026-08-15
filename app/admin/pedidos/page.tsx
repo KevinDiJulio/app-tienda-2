@@ -1,5 +1,6 @@
 import { createClerkClient } from "@clerk/nextjs/server";
 import { prisma } from "../../../lib/prisma";
+import SelectEstado from "./SelectEstado";
 import styles from "./page.module.css";
 
 type Pedido = {
@@ -72,9 +73,7 @@ export default async function AdminPedidosPage() {
                   </td>
                   <td>{pedido.cantidad}</td>
                   <td>
-                    <span className={`${styles.estado} ${styles[pedido.estado]}`}>
-                      {pedido.estado}
-                    </span>
+                    <SelectEstado id={pedido.id} estado={pedido.estado} />
                   </td>
                   <td>{new Date(pedido.creadoEn).toLocaleDateString("es-AR")}</td>
                 </tr>

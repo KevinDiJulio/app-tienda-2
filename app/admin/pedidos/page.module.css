@@ -52,3 +52,17 @@
 .confirmado { background: #dcfce7; color: #166534; }
 .enviado    { background: #dbeafe; color: #1e40af; }
 .cancelado  { background: #fee2e2; color: #991b1b; }
+
+.selectEstado {
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.selectEstado:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
