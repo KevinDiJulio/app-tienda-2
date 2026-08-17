@@ -17,24 +17,14 @@ export async function crearProducto(formData: FormData) {
 }
 
 export async function borrarProducto(id: number) {
-  const pedidosRes = await fetch(
-    `${process.env.PEDIDOS_API_URL}/api/pedidos`,
-    { headers: { "x-api-key": process.env.PEDIDOS_API_KEY! } }
-  );
-
-  if (!pedidosRes.ok) {
-    throw new Error("No se pudo verificar el estado de los pedidos. Intente nuevamente.");
-  }
-
-  const pedidos: { productoId: number; estado: string }[] = await pedidosRes.json();
-  const activos = pedidos.filter((p) => p.productoId === id && p.estado !== "cancelado");
-
-  if (activos.length > 0) {
+  const activos = await prisma.pedido.count({
+    where: { productoId: id, estado: { not: "cancelado" } },
+  });
+  if (activos > 0) {
     throw new Error(
-      `No se puede borrar: hay ${activos.length} pedido${activos.length > 1 ? "s" : ""} activo${activos.length > 1 ? "s" : ""} para este producto.`
+      `No se puede borrar: hay ${activos} pedido${activos > 1 ? "s" : ""} activo${activos > 1 ? "s" : ""} para este producto.`
     );
   }
-
   await prisma.producto.delete({ where: { id } });
   revalidatePath("/admin");
   revalidatePath("/");
